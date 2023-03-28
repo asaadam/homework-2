@@ -8,79 +8,107 @@
 - jalankan perintah `yarn start`
 - untuk mengambil file dari upload, maka dapat diakses dengan `http://localhost:3000/uploads/{nama_file}`
 
-Endpoint
-POST /register
+**Endpoint**
+
+
+# POST /register
+
+
 Endpoint untuk mendaftarkan pengguna baru.
 
-Request Body
+## Request Body
 
 name (string) : Nama lengkap pengguna.
+
 email (string) : Alamat email pengguna.
+
 password (string) : Password pengguna.
-Response
+
+## Response
 
 user (object) : Objek pengguna yang baru saja dibuat.
-POST /login
-Endpoint untuk melakukan autentikasi pengguna.
 
-Request Body
+
+# POST /login
+Endpoint untuk melakukan autentikasi pengguna
+
+## Request Body
 
 email (string) : Alamat email pengguna.
-password (string) : Password pengguna.
-Response
 
+password (string) : Password pengguna.
+
+## Response
 token (string) : Token autentikasi yang dihasilkan.
-POST /books
+
+
+# POST /books
+
 Endpoint untuk membuat buku baru.
 
-Request Headers
+## Request Headers
 
-Authorization (string) : Token autentikasi.
-Request Body
+ Authorization (string) : Token autentikasi.
+## Request Body
 
 title (string) : Judul buku.
+
 author (string) : Nama penulis buku.
+
 publisher (string) : Nama penerbit buku.
+
 year (string) : Tahun terbit buku.
+
 pages (string) : Jumlah halaman buku.
+
 image (file) : Gambar sampul buku.
-Response
+
+### Response
 
 book (object) : Objek buku yang baru saja dibuat.
-GET /books
+
+# GET /books
 Endpoint untuk mengambil semua buku yang tersedia.
 
-Response
+### Response
 
 books (array) : Kumpulan objek buku yang tersedia.
-PUT /books/:id
+
+# PUT /books/:id
 Endpoint untuk mengubah data buku.
 
-Request Headers
+## Request Headers
 
 Authorization (string) : Token autentikasi.
-Request Parameters
+
+## Request Parameters
 
 id (number) : ID buku yang akan diubah.
 Request Body
 
 title (string) : Judul buku.
+
 author (string) : Nama penulis buku.
+
 publisher (string) : Nama penerbit buku.
+
 year (string) : Tahun terbit buku.
+
 pages (string) : Jumlah halaman buku.
-Response
+## Response
 
 book (object) : Objek buku yang telah diubah.
-DELETE /books/:id
+
+# DELETE /books/:id
 Endpoint untuk menghapus buku.
 
-Request Headers
+## Request Headers
 
 Authorization (string) : Token autentikasi.
-Request Parameters
+## Request Parameters
 
 id (number) : ID buku yang akan dihapus.
-Response
+
+### Response
 
 book (object) : Objek buku yang telah dihapus.
