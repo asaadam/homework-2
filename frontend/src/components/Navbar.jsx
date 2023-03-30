@@ -3,6 +3,7 @@ import {
   Flex,
   FormControl,
   FormLabel,
+  HStack,
   Input,
   Modal,
   ModalBody,
@@ -50,21 +51,28 @@ const Navbar = () => {
           </Text>
         </Flex>
       </Link>
-      {!isLogin ? (
-        <Button onClick={onOpen} colorScheme="blue">
-          Login
-        </Button>
-      ) : (
-        <Button
-          colorScheme="blue"
-          onClick={() => {
-            window.localStorage.removeItem("token");
-            setIsLogin(false);
-          }}
-        >
-          Logout
-        </Button>
-      )}
+      <HStack>
+        {isLogin && (
+          <Link to="/newbook">
+            <Button colorScheme="blackAlpha">Create New Book</Button>
+          </Link>
+        )}
+        {!isLogin ? (
+          <Button onClick={onOpen} colorScheme="blue">
+            Login
+          </Button>
+        ) : (
+          <Button
+            colorScheme="blue"
+            onClick={() => {
+              window.localStorage.removeItem("token");
+              setIsLogin(false);
+            }}
+          >
+            Logout
+          </Button>
+        )}
+      </HStack>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <form
@@ -97,7 +105,11 @@ const Navbar = () => {
               <VStack>
                 <FormControl isRequired>
                   <FormLabel>Email</FormLabel>
-                  <Input type="email" placeholder="Enter your email address" />
+                  <Input
+                    name="email"
+                    type="email"
+                    placeholder="Enter your email address"
+                  />
                 </FormControl>
                 <FormControl isRequired>
                   <FormLabel>Password</FormLabel>

@@ -21,15 +21,8 @@ async function loginUser(email, password) {
 }
 
 // Function for create book endpoint
-async function createBook(title, author, publisher, year, pages, image) {
+async function createBook(formData) {
   try {
-    const formData = new FormData();
-    formData.append('title', title);
-    formData.append('author', author);
-    formData.append('publisher', publisher);
-    formData.append('year', year);
-    formData.append('pages', pages);
-    formData.append('image', image);
     const response = await instance.post('/books', formData, {
       headers: { 'Content-Type': 'multipart/form-data' }
     });
