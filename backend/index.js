@@ -160,6 +160,21 @@ app.delete("/books/:id", authenticateTokenMiddleware, async (req, res) => {
   }
 });
 
+// get book by id 
+app.get("/books/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const book = await prisma.book.findUnique({
+      where: { id: Number(id) },
+    });
+    res.json({ book });
+  }
+  catch (e) {
+    console.log(e);
+    res.status(400).json({ message: "Something went wrong" });
+  }
+});
+
 
 // Start the server
 app.listen(8000, () => {
