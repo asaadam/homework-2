@@ -19,8 +19,10 @@ function authenticateTokenMiddleware(req, res, next) {
   next();
 }
 
+
+app.use(express.json());
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: 'http://localhost:5173',
   allowedHeaders: "Origin, X-Requested-With, Content-Type, Accept, Authorization",
   methods: "GET, POST, PUT, DELETE, PATCH, OPTIONS",
   optionsSuccessStatus: 200
@@ -64,18 +66,25 @@ app.post("/register", async (req, res) => {
 });
 
 app.post("/login", async (req, res) => {
-  const { email, password } = req.body;
-  console.log("email", email, "password", password);
-  const user = await prisma.user.findUnique({ where: { email } });
-  if (!user) {
-    return res.status(400).json({ message: "Invalid credentials" });
+  try {
+    const { email, password } = req.body;
+    const user = await prisma.user.findUnique({ where: { email } });
+    if (!user) {
+      return res.status(400).json({ message: "Invalid credentials" });
+    }
+    const passwordMatch = await bcrypt.compare(password, user.password);
+    if (!passwordMatch) {
+      return res.status(400).json({ message: "Invalid credentials" });
+    }
+    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
+    res.json({ token });
+
   }
-  const passwordMatch = await bcrypt.compare(password, user.password);
-  if (!passwordMatch) {
-    return res.status(400).json({ message: "Invalid credentials" });
+  catch (err) {
+    console.log(err);
+    res.status(400).json({ message: "Invalid credentials" });
   }
-  const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
-  res.json({ token });
+
 });
 
 // create a book 
