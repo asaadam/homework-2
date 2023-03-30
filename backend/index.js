@@ -121,29 +121,43 @@ app.get("/books", async (req, res) => {
 
 // edit a book
 app.put("/books/:id", authenticateTokenMiddleware, async (req, res) => {
-  const { id } = req.params;
-  const { title, author, publisher, year, pages } = req.body;
-  const book = await prisma.book.update({
-    where: { id: Number(id) },
-    data: {
-      title,
-      author,
-      publisher,
-      year,
-      pages,
-    },
-  });
-  res.json({ book });
+  try {
+    const { id } = req.params;
+    const { title, author, publisher, year, pages } = req.body;
+    const book = await prisma.book.update({
+      where: { id: Number(id) },
+      data: {
+        title,
+        author,
+        publisher,
+        year,
+        pages,
+      },
+    });
+    res.json({ book });
+  }
+  catch (err) {
+    console.log(err);
+    res.status(400).json({ message: "Something went wrong" });
+  }
+
+
 });
 
 
 // delete a book
 app.delete("/books/:id", authenticateTokenMiddleware, async (req, res) => {
-  const { id } = req.params;
-  const book = await prisma.book.delete({
-    where: { id: Number(id) },
-  });
-  res.json({ book });
+  try {
+    const { id } = req.params;
+    const book = await prisma.book.delete({
+      where: { id: Number(id) },
+    });
+    res.json({ book });
+  }
+  catch (e) {
+    console.log(e);
+    res.status(400).json({ message: "Something went wrong" });
+  }
 });
 
 
