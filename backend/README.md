@@ -6,7 +6,7 @@
 - lakukan migrasi database dengan perintah `yarn migrate`
 - jalankan perintah `yarn prisma generate`
 - jalankan perintah `yarn start`
-- untuk mengambil file dari upload, maka dapat diakses dengan `http://localhost:3000/uploads/{nama_file}`
+- untuk mengambil file dari upload, maka dapat diakses dengan `http://localhost:8000/uploads/{nama_file}`
 
 **Endpoint**
 
@@ -50,7 +50,7 @@ Endpoint untuk membuat buku baru.
 
  Authorization (string) : Token autentikasi.
 ## Request Body
-
+ (Multi-part Form)
 title (string) : Judul buku.
 
 author (string) : Nama penulis buku.
