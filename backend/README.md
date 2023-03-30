@@ -112,3 +112,17 @@ id (number) : ID buku yang akan dihapus.
 ### Response
 
 book (object) : Objek buku yang telah dihapus.
+
+
+# GET /books/:id
+Endpoint untuk mendapatkan detail buku berdasarkan ID.
+
+## Request Headers
+
+## Request Parameters
+
+id (number) : ID buku .
+
+### Response
+
+book (object) : Objek buku yang .
