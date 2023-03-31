@@ -9,6 +9,7 @@ import Navbar from "./components/Navbar";
 import BookForm from "./pages/NewBooks";
 import Homepage from "./pages/Homepage";
 import Register from "./pages/Register";
+import BookDetails from "./pages/BooksDetail";
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
           <Route path={"/"} element={<Homepage />} />
           <Route path={"/register"} element={<Register />} />
           <Route path={"/newbook"} element={<BookForm />} />
-
+          <Route path={"/books/:id"} element={<BookDetails />} />
         </Routes>
       </Router>
     </VStack>

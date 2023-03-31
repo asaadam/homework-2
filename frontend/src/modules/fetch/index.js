@@ -62,4 +62,13 @@ async function deleteBook(id) {
   }
 }
 
-export { registerUser, loginUser, createBook, getAllBooks, editBook, deleteBook };
+async function getBookDetailById(id) {
+  try {
+    const response = await instance.get(`/books/${id}`);
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response.data.message || 'Something went wrong');
+  }
+}
+
+export { registerUser, loginUser, createBook, getAllBooks, editBook, deleteBook,getBookDetailById };
