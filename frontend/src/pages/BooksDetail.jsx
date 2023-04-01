@@ -1,12 +1,29 @@
-import { Box, Flex, Heading, Image, Skeleton, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  HStack,
+  Image,
+  Popover,
+  PopoverArrow,
+  PopoverBody,
+  PopoverCloseButton,
+  PopoverContent,
+  PopoverHeader,
+  PopoverTrigger,
+  Skeleton,
+  Text,
+} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { getBookDetailById } from "../modules/fetch";
+import { useNavigate, useParams } from "react-router-dom";
+import { deleteBook, getBookDetailById } from "../modules/fetch";
 
 export default function BookDetails() {
   const [book, setBook] = useState(null);
   const [isLoading, setLoading] = useState(true);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchBook = async () => {
@@ -20,6 +37,15 @@ export default function BookDetails() {
     };
     fetchBook();
   }, [id]);
+
+  const handleDeleteBook = async () => {
+    try {
+      await deleteBook(id);
+      navigate("/");
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <Box>
@@ -49,6 +75,25 @@ export default function BookDetails() {
           </Box>
         </Flex>
       )}
+      <HStack>
+        <Popover>
+          <PopoverTrigger>
+            <Button colorScheme="red">Delete</Button>
+          </PopoverTrigger>
+          <PopoverContent>
+            <PopoverArrow />
+            <PopoverCloseButton />
+            <PopoverHeader>Confirmation!</PopoverHeader>
+            <PopoverBody>
+              Are you sure you want to delete this book?
+            </PopoverBody>
+            <Button onClick={handleDeleteBook} colorScheme="red">
+              Delete
+            </Button>
+          </PopoverContent>
+        </Popover>
+        <Button>Edit</Button>
+      </HStack>
     </Box>
   );
 }
