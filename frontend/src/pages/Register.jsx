@@ -25,7 +25,7 @@ const Register = () => {
       return;
     }
     try {
-      const res = registerUser(
+      await registerUser(
         e.target.name.value,
         e.target.email.value,
         password
@@ -39,15 +39,16 @@ const Register = () => {
       });
       navigate("/");
     } catch (e) {
+      const error = new Error(e);
       toast({
         title: "An error occurred.",
-        description: "Please try again.",
+        description: error?.message || "An error occurred. Please try again.",
         status: "error",
         duration: 3000,
         isClosable: true,
       });
     }
-    setError("An error occurred. Please try again.");
+    setError(error?.message || "An error occurred");
   };
 
   return (
