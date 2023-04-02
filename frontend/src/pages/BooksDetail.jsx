@@ -75,27 +75,29 @@ export default function BookDetails() {
           </Box>
         </Flex>
       )}
-      <HStack>
-        <Popover>
-          <PopoverTrigger>
-            <Button colorScheme="red">Delete</Button>
-          </PopoverTrigger>
-          <PopoverContent>
-            <PopoverArrow />
-            <PopoverCloseButton />
-            <PopoverHeader>Confirmation!</PopoverHeader>
-            <PopoverBody>
-              Are you sure you want to delete this book?
-            </PopoverBody>
-            <Button onClick={handleDeleteBook} colorScheme="red">
-              Delete
-            </Button>
-          </PopoverContent>
-        </Popover>
-        <Link to={`/editbook/${id}`}>
-        <Button>Edit</Button>
-        </Link>
-      </HStack>
+      {window.localStorage.getItem("token") && (
+        <HStack>
+          <Popover>
+            <PopoverTrigger>
+              <Button colorScheme="red">Delete</Button>
+            </PopoverTrigger>
+            <PopoverContent>
+              <PopoverArrow />
+              <PopoverCloseButton />
+              <PopoverHeader>Confirmation!</PopoverHeader>
+              <PopoverBody>
+                Are you sure you want to delete this book?
+              </PopoverBody>
+              <Button onClick={handleDeleteBook} colorScheme="red">
+                Delete
+              </Button>
+            </PopoverContent>
+          </Popover>
+          <Link to={`/editbook/${id}`}>
+            <Button>Edit</Button>
+          </Link>
+        </HStack>
+      )}
     </Box>
   );
 }
