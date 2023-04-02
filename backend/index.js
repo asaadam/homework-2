@@ -89,7 +89,6 @@ app.post("/login", async (req, res) => {
 
 // create a book 
 app.post("/books", authenticateTokenMiddleware, upload.single('image'), async (req, res) => {
-  console.log("req.file", req.file);
   const { title, author, publisher, year, pages } = req.body;
   try {
     const book = await prisma.book.create({

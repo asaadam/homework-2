@@ -16,7 +16,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { deleteBook, getBookDetailById } from "../modules/fetch";
 
 export default function BookDetails() {
@@ -92,7 +92,9 @@ export default function BookDetails() {
             </Button>
           </PopoverContent>
         </Popover>
+        <Link to={`/editbook/${id}`}>
         <Button>Edit</Button>
+        </Link>
       </HStack>
     </Box>
   );
