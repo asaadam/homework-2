@@ -18,13 +18,14 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../modules/fetch";
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLogin, setIsLogin] = useState(false);
   const toast = useToast();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -67,6 +68,7 @@ const Navbar = () => {
             onClick={() => {
               window.localStorage.removeItem("token");
               setIsLogin(false);
+              navigate("/")
             }}
           >
             Logout
@@ -85,6 +87,7 @@ const Navbar = () => {
                 e.target.password.value
               );
               window.localStorage.setItem("token", token.token);
+              navigate("/");
               onClose();
             } catch (err) {
               toast({
